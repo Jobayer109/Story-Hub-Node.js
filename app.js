@@ -47,10 +47,23 @@ app.use("/auth", require("./routes/auth"));
 app.use("/stories", require("./routes/stories"));
 
 // handlebars helpers
-const { formatDate } = require("./helpers/hbs.helper");
+const { formatDate, stripTags, truncate, editIcon, select } = require("./helpers/hbs.helper");
 // Express - handlebars
-app.engine(".hbs", engine({ helpers: { formatDate }, defaultLayout: "main", extname: ".hbs" }));
+app.engine(
+  ".hbs",
+  engine({
+    helpers: { formatDate, stripTags, truncate },
+    defaultLayout: "main",
+    extname: ".hbs",
+  })
+);
 app.set("view engine", ".hbs");
+
+// Set global var
+app.use(function (req, res, next) {
+  res.locals.user = req.user || null;
+  next();
+});
 
 // Server run
 const startDB = async () => {
