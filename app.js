@@ -46,8 +46,10 @@ app.use("/", require("./routes/index"));
 app.use("/auth", require("./routes/auth"));
 app.use("/stories", require("./routes/stories"));
 
+// handlebars helpers
+const { formatDate } = require("./helpers/hbs.helper");
 // Express - handlebars
-app.engine(".hbs", engine({ defaultLayout: "main", extname: ".hbs" }));
+app.engine(".hbs", engine({ helpers: { formatDate }, defaultLayout: "main", extname: ".hbs" }));
 app.set("view engine", ".hbs");
 
 // Server run
