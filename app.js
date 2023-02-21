@@ -6,21 +6,16 @@ const { engine } = require("express-handlebars");
 const path = require("path");
 const session = require("express-session");
 const passport = require("passport");
-dotenv.config({ path: "./config/config.env" });
-
 const app = express();
 const PORT = process.env.PORT || 5000;
+
+dotenv.config({ path: "./config/config.env" });
 
 // middleware
 app.use(express.static(path.join(__dirname, "public")));
 
-// Load config
+// passport config
 require("./config/passport")(passport);
-
-// Logging
-if (process.env.NODE_ENV === "development") {
-  app.use(morgan("dev"));
-}
 
 // session config
 app.use(
@@ -30,10 +25,14 @@ app.use(
     saveUninitialized: false,
   })
 );
-
 // Passport initialize
 app.use(passport.initialize());
 app.use(passport.session());
+
+// Logging
+if (process.env.NODE_ENV === "development") {
+  app.use(morgan("dev"));
+}
 
 // Routes
 app.use("/", require("./routes/index"));
@@ -51,7 +50,6 @@ const startDB = async () => {
       PORT,
       console.log(`server running in ${process.env.NODE_ENV} mode on port http://localhost:${PORT}`)
     );
-    console.log("Database connected");
   } catch (error) {
     console.log(error.message);
     process.exit(1);
