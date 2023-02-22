@@ -14,9 +14,10 @@ const PORT = process.env.PORT || 5000;
 dotenv.config({ path: "./config/config.env" });
 
 // middleware
-app.use(express.static(path.join(__dirname, "public")));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+app.use(express.static(path.join(__dirname, "./public")));
+app.set("views", path.join(__dirname, "./views"));
 
 // Method override
 app.use(
