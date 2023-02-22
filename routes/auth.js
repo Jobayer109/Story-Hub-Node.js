@@ -2,21 +2,19 @@ const express = require("express");
 const router = express.Router();
 const passport = require("passport");
 
-router.get("/google", function (req, res, next) {
-  const redirectUrl = req.query.redirectUrl; // dynamically generate callback URL
+router.get("/google", (req, res, next) => {
+  const redirectUrl = req.query.redirectUrl;
   passport.authenticate("google", {
-    callbackURL: redirectUrl, // pass dynamic callback URL
+    callbackURL: redirectUrl,
     scope: ["profile"],
   })(req, res, next);
 });
 
-// Define the callback route for the Google authentication
 router.get(
   "/google/callback",
   passport.authenticate("google", { failureRedirect: "/" }),
-  function (req, res) {
-    // Successful authentication, redirect home.
-    res.redirect("/");
+  (req, res) => {
+    res.redirect("/dashboard");
   }
 );
 
