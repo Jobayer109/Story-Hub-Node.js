@@ -1,6 +1,7 @@
 const GoogleStrategy = require("passport-google-oauth20").Strategy;
 const User = require("../models/user");
 const dotenv = require("dotenv");
+const port = process.env.PORT || 5000;
 dotenv.config({ path: "./config.env" });
 
 module.exports = (passport) => {
@@ -9,7 +10,7 @@ module.exports = (passport) => {
       {
         clientID: "383877827252-g5kpoac3p9vjgdpfprq898rg5e6r2tcb.apps.googleusercontent.com",
         clientSecret: "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",
-        callbackURL: "http://localhost:5000/auth/google/callback",
+        callbackURL: `http://localhost:${port}/auth/google/callback`,
       },
       async (accessToken, refreshToken, profile, done) => {
         const { id, displayName, name } = profile;
