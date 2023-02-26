@@ -7,12 +7,13 @@ module.exports = (passport) => {
   passport.use(
     new GoogleStrategy(
       {
-        clientID: process.env.GOOGLE_CLIENT_ID,
-        clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-        callbackURL: "/auth/google/callback",
+        clientID: "383877827252-g5kpoac3p9vjgdpfprq898rg5e6r2tcb.apps.googleusercontent.com",
+        clientSecret: "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",
+        callbackURL: "http://localhost:5000/auth/google/callback",
       },
       async (accessToken, refreshToken, profile, done) => {
         const { id, displayName, name } = profile;
+        console.log(profile);
         const newUser = {
           googleId: id,
           displayName: displayName,
@@ -34,6 +35,7 @@ module.exports = (passport) => {
       }
     )
   );
+
   // Serialized and deserialized User
   passport.serializeUser((user, done) => {
     done(null, user.id);

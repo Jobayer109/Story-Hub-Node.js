@@ -18,7 +18,7 @@ router.get("/dashboard", confirmAuth, async (req, res) => {
     });
   } catch (error) {
     res.render("errors/500");
-    console.log(error);
+    res.send(error.message);
   }
 });
 

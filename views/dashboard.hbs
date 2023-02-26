@@ -1,7 +1,6 @@
-<h6>Dashboard</h6>
-<h3>Welcome, {{name}} <i class="fas fa-pen"></i> </h3>
-<p>Here are your story that you shared</p>
-
+<h4 style="font-weight: 600;">Welcome, <span style="color:#088f71;">{{name}}</span>.</i> </h3>
+<h6 style="font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif">Here are your story that you shared ...</h6>
+<br>
 {{#if stories}}
     <table class="striped">
         <thead>
@@ -35,6 +34,6 @@
     </table>
 
 {{else}}
-<h5 class="red">You have not created any stories</h5>
+<h5 style="color: red; font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;">You have not created any stories.</h5>
 
 {{/if}}
